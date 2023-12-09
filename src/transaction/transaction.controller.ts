@@ -4,7 +4,7 @@ import { CreateTransactionDto } from './dto/transaction.dto';
 
 @Controller('transaction')
 export class TransactionController {
-  constructor(private transactionService: TransactionService) {}
+  constructor(private readonly transactionService: TransactionService) {}
   @Get()
   getAllTransactions() {
     return this.transactionService.findAll();
@@ -12,10 +12,7 @@ export class TransactionController {
   @Post()
   createTransaction(@Body() newTranaction: CreateTransactionDto) {
     console.log(newTranaction.amount);
-    this.transactionService.createTransaction(
-      newTranaction.description,
-      newTranaction.status,
-    );
+    this.transactionService.createTransaction(newTranaction);
     return 'nueva transaccion';
   }
 }

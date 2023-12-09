@@ -10,12 +10,16 @@ export class Transaction {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'float' })
   amount: number;
 
   @Column({ length: 450 })
-  description: string;
+  account: string;
 
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: TransactionStatus,
+    default: TransactionStatus.APPROVED,
+  })
   status: TransactionStatus;
 }
