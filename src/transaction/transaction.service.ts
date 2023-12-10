@@ -9,10 +9,8 @@ export class TransactionService {
     private transactionRepository: Repository<Transaction>,
   ) {}
   createTransaction(createTransactionDto: CreateTransactionDto) {
-    const transaction = new Transaction();
-    transaction.amount = createTransactionDto.amount;
-    transaction.account = createTransactionDto.account;
-    this.transactionRepository.save(transaction);
+    // const transaction = new Transaction(createTransactionDto);
+    this.transactionRepository.save(createTransactionDto);
     return `${createTransactionDto.account}`;
   }
 

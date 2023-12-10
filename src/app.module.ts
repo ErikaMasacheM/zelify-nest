@@ -1,11 +1,18 @@
 import { Module } from '@nestjs/common';
 import { TransactionModule } from './transaction/transaction.module';
-import { TransactionController } from './transaction/transaction.controller';
-import { TransactionService } from './transaction/transaction.service';
-import { DatabaseModule } from './database/database.module';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
 
 @Module({
-  imports: [TransactionModule],
+  imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      playground: true,
+    }),
+    TransactionModule,
+  ],
   controllers: [],
   providers: [],
 })

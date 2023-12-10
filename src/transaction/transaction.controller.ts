@@ -11,8 +11,7 @@ export class TransactionController {
   }
   @Post()
   createTransaction(@Body() newTranaction: CreateTransactionDto) {
-    console.log(newTranaction.amount);
     this.transactionService.createTransaction(newTranaction);
-    return 'nueva transaccion';
+    return newTranaction;
   }
 }
